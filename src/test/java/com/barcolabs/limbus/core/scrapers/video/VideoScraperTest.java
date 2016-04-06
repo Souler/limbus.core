@@ -2,10 +2,12 @@ package com.barcolabs.limbus.core.scrapers.video;
 
 import com.barcolabs.limbus.core.exceptions.ScrapingException;
 import com.barcolabs.limbus.core.scrapers.VideoSiteScraper;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Map;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -19,6 +21,34 @@ public abstract class VideoScraperTest {
 
     protected String performGet(VideoSiteScraper scraper, String uri) throws IOException, ScrapingException {
         return scraper.get(uri);
+    }
+
+    protected boolean useProxy() { return false; }
+
+    @Before
+    public void setProxy() {
+
+        if (!this.useProxy()) {
+            System.setProperty("http.proxyHost", "");
+            System.setProperty("https.proxyHost", "");
+            System.setProperty("http.proxyPort", "");
+            System.setProperty("https.proxyPort", "");
+            return;
+        }
+
+        Map<String, String> env = System.getenv();
+        String proxyHost = env.get("PROXY_HOST");
+        String proxyPort = env.get("PROXY_PORT");
+
+        if (proxyHost != null) {
+            System.setProperty("http.proxyHost", proxyHost);
+            System.setProperty("https.proxyHost", proxyHost);
+        }
+
+        if (proxyPort != null) {
+            System.setProperty("http.proxyPort", proxyPort);
+            System.setProperty("https.proxyPort", proxyPort);
+        }
     }
 
     @Test
