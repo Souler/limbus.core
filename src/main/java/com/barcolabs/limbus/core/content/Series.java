@@ -2,9 +2,10 @@ package com.barcolabs.limbus.core.content;
 
 import com.barcolabs.limbus.core.scrapers.ContentSiteScraper;
 
+import java.io.Serializable;
 import java.text.Normalizer;
 
-public class Series implements Searchable {
+public class Series implements Searchable, Serializable {
 
     private ContentSiteScraper scraper;
     private String id;

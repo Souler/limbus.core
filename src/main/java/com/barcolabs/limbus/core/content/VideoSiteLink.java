@@ -2,7 +2,9 @@ package com.barcolabs.limbus.core.content;
 
 import com.barcolabs.limbus.core.scrapers.ContentSiteScraper;
 
-public class VideoSiteLink {
+import java.io.Serializable;
+
+public class VideoSiteLink implements Serializable{
 
     private ContentSiteScraper scraper;
     private String uri;

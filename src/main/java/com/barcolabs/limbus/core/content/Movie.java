@@ -2,12 +2,9 @@ package com.barcolabs.limbus.core.content;
 
 import com.barcolabs.limbus.core.scrapers.ContentSiteScraper;
 
-/**
- * Scraped movie class
- *
- * @author Juan José
- */
-public class Movie implements Searchable {
+import java.io.Serializable;
+
+public class Movie implements Searchable, Serializable, Watchable {
 
     private ContentSiteScraper scraper;
     private String id;
