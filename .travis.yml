@@ -1,17 +1,9 @@
 language: java
 jdk:
+  - openjdk6
+  - openjdk7
   - oraclejdk7
-env:
-  - SITE: FlashX
-  - SITE: Gamovideo
-  - SITE: Nowvideo
-  - SITE: Powvideo
-  - SITE: StreamCloud
-  - SITE: Streame
-  - SITE: StreaminTo
-  - SITE: StreamPlay
-script:
-  - mvn -Dtest=${SITE}ScraperTest test
+  - oraclejdk8
 after_success:
   - mvn clean cobertura:cobertura coveralls:report
   - mvn clean test jacoco:report coveralls:report
