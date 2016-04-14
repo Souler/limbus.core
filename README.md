@@ -2,7 +2,7 @@
 
 # Limbus Core [![Build Status](https://travis-ci.org/Souler/limbus.core.svg?branch=master)](https://travis-ci.org/Souler/limbus.core) [![Release](https://jitpack.io/v/souler/limbus.core.svg)](https://jitpack.io/#souler/limbus.core) [![Coverage Status](https://coveralls.io/repos/github/Souler/limbus.core/badge.svg?branch=master)](https://coveralls.io/github/Souler/limbus.core?branch=master)
 
-Limbus Core is library for scraping video websites abd websites that link the previous ones.
+Limbus Core is library for scraping video websites and websites that link the previous ones.
 
 ## Installation
 
@@ -18,20 +18,21 @@ We are not in Maven Central, but you can install us with maven thanks to [jitpac
         <dependency>
             <groupId>com.github.souler</groupId>
             <artifactId>limbus.core</artifactId>
-            <version>1.+</version>
+            <version>0.+</version>
         </dependency>
     </dependencies>
 ```
 
 ## Documentation
-Available via [jitpack](https://jitpack.io/) at [here](https://jitpack.io/com/github/souler/limbus.core/1.0.0/javadoc/)
+Available via [jitpack](https://jitpack.io/) at [here](https://jitpack.io/com/github/souler/limbus.core/0.1.1/javadoc/)
 
 ## How it works
 
 ### Video sites
 
-Given a cloud video provider url that would open a flash/javascript video player if you open it
-in your web browser, this classes allow you to extract the actual URL of the video that plays.
+Given a url that would open a web containing a flash or javascript video player if you open it
+in your web browser, the `VideoSiteScraper` class allows you to extract the actual URL of the
+video that plays in the embeded web player.
 
 ```java
 try {
@@ -53,7 +54,7 @@ try {
 * StreaminTo via `StreaminToScraper`
 * StreamPlay via `StreamPlayScraper`
 
-You can check if any scraper stope woking [here](https://travis-ci.org/Souler/limbus.core)
+You can check if any scraper stops woking [here](https://travis-ci.org/Souler/limbus.core)
 
 ### Content sites
 
