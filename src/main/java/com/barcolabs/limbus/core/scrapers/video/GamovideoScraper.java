@@ -36,11 +36,9 @@ public class GamovideoScraper extends VideoSiteScraper {
 
         GetAndPostVideoScraper.checkForErrors(doc);
 
-        String toEvalGenerator = EvalVideoScraper.getCodeToEval(doc);
+        String code = EvalVideoScraper.getCodeToEval(doc);
         ScrapingJavaScriptEngine engine = EvalVideoScraper.getEngine();
-
-        String toEval = (String) engine.eval(toEvalGenerator);
-        engine.eval(toEval);
+        engine.eval(code);
 
         String result = engine.getJwPlayer().getFile();
         if (result == null)

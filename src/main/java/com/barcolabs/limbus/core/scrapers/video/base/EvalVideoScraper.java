@@ -20,12 +20,10 @@ public abstract class EvalVideoScraper extends GetAndPostVideoScraper {
 
     public static String getCodeToEval(Document doc) throws ScrapingException {
         Elements scripts = doc.select("script");
-        String targetScript = null;
+
         for (Element script : scripts) {
             String html = script.html().trim();
-            if (html.indexOf("eval") == 0) {
-                return html.substring("eval".length(), html.length());
-            } else if (html.indexOf("jwplayer(") == 0) {
+            if (html.indexOf("eval") == 0 || html.indexOf("jwplayer(") == 0) {
                 return html;
             }
         }
@@ -51,13 +49,9 @@ public abstract class EvalVideoScraper extends GetAndPostVideoScraper {
 
         checkForErrors(doc);
 
-        String toEvalGenerator = getCodeToEval(doc);
+        String code = getCodeToEval(doc);
         ScrapingJavaScriptEngine engine = getEngine();
-        Object interpreted = engine.eval(toEvalGenerator);
-
-        if (interpreted instanceof String) {
-            engine.eval((String) interpreted);
-        }
+        engine.eval(code);
         return findResource(engine);
     }
 

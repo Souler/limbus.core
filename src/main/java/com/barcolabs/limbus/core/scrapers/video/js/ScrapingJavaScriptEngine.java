@@ -54,6 +54,11 @@ public class ScrapingJavaScriptEngine {
                 return warpedJWPlayer;
             }
         });
+        scope.put("eval", scope, new BaseFunction() {
+            public Object call(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
+                return ScrapingJavaScriptEngine.this.eval((String) args[0]);
+            }
+        });
         // Wire the JS objects to the Java ones
         this.jwPlayer = (JWPlayer) Context.jsToJava(warpedJWPlayer, JWPlayer.class);
     }
