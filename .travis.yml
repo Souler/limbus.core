@@ -1,7 +1,6 @@
 language: java
 jdk:
   - oraclejdk7
-script: mvn -Dtest=${SITE}ScraperTest test
 env:
   - SITE: FlashX
   - SITE: Gamovideo
@@ -11,3 +10,8 @@ env:
   - SITE: Streame
   - SITE: StreaminTo
   - SITE: StreamPlay
+script:
+  - mvn -Dtest=${SITE}ScraperTest test
+after_success:
+  - mvn clean cobertura:cobertura coveralls:report
+  - mvn clean test jacoco:report coveralls:report
