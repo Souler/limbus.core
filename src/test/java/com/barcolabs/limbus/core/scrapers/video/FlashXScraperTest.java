@@ -7,14 +7,14 @@ public class FlashXScraperTest extends VideoScraperTest {
 
     @Override
     protected String[] getAliveLiks() {
-        return new String[] {
+        return new String[]{
                 "http://www.flashx.tv/gcluvdew6reo.html"
         };
     }
 
     @Override
     protected String[] getDeadLinks() {
-        return new String[] {
+        return new String[]{
                 // TODO: Research them
         };
     }

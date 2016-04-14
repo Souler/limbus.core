@@ -7,7 +7,6 @@ import org.jsoup.nodes.Document;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.NativeObject;
 
-import java.io.IOException;
 import java.util.regex.Pattern;
 
 public class PowvideoScraper extends EvalVideoScraper {
@@ -33,22 +32,5 @@ public class PowvideoScraper extends EvalVideoScraper {
     @Override
     protected long findWaitTime(Document doc) {
         return super.findWaitTime(doc) * 2;
-    }
-
-    @Override
-    protected String parsePostedDocument(Document doc) throws ScrapingException {
-        try {
-            return super.parsePostedDocument(doc);
-        } catch (ScrapingException e) {
-            if (e.getMessage().equals("Skipped countdown")) {
-                System.out.println("Powvideo: got skipped countdowm");
-                try {
-                    return this.get(doc.location());
-                } catch (IOException e1) {}
-            }
-            else
-                throw e;
-        }
-        return null;
     }
 }

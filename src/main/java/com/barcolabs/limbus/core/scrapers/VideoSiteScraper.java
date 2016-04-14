@@ -9,19 +9,8 @@ import java.net.URL;
 
 public abstract class VideoSiteScraper extends Scraper {
 
-    public abstract String get(String uri) throws IOException, ScrapingException;
-    public abstract String getHandledHost();
-    public boolean canHandle(String uri) {
-        try {
-            URL url = new URL(uri);
-            return url.getHost().equals(getHandledHost());
-        } catch (MalformedURLException e) {
-            return false;
-        }
-    }
-
     public static String getVideoURI(String videoSiteUrl) throws IOException, ScrapingException {
-        VideoSiteScraper[] scrapers = new VideoSiteScraper[] {
+        VideoSiteScraper[] scrapers = new VideoSiteScraper[]{
                 new FlashXScraper(),
                 new GamovideoScraper(),
                 new NowvideoScraper(),
@@ -37,5 +26,18 @@ public abstract class VideoSiteScraper extends Scraper {
                 return scraper.get(videoSiteUrl);
 
         return null;
+    }
+
+    public abstract String get(String uri) throws IOException, ScrapingException;
+
+    public abstract String getHandledHost();
+
+    public boolean canHandle(String uri) {
+        try {
+            URL url = new URL(uri);
+            return url.getHost().equals(getHandledHost());
+        } catch (MalformedURLException e) {
+            return false;
+        }
     }
 }

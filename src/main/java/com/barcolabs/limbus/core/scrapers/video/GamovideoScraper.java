@@ -1,20 +1,16 @@
 package com.barcolabs.limbus.core.scrapers.video;
 
 import com.barcolabs.limbus.core.exceptions.ScrapingException;
+import com.barcolabs.limbus.core.scrapers.VideoSiteScraper;
 import com.barcolabs.limbus.core.scrapers.video.base.EvalVideoScraper;
 import com.barcolabs.limbus.core.scrapers.video.base.GetAndPostVideoScraper;
-import com.barcolabs.limbus.core.scrapers.VideoSiteScraper;
 import com.barcolabs.limbus.core.scrapers.video.js.ScrapingJavaScriptEngine;
-
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 
-/**
- * Created by barbosa on 1/09/15.
- */
 public class GamovideoScraper extends VideoSiteScraper {
 
     @Override
@@ -23,7 +19,7 @@ public class GamovideoScraper extends VideoSiteScraper {
     }
 
     private Document getDocument(String location) throws IOException {
-        Connection.Response response= Jsoup.connect(location)
+        Connection.Response response = Jsoup.connect(location)
                 .ignoreContentType(true)
                 .userAgent(USER_AGENT)
                 .followRedirects(true)

@@ -1,40 +1,31 @@
 package com.barcolabs.limbus.core.scrapers.video;
 
-        import com.barcolabs.limbus.core.exceptions.ScrapingException;
-        import com.barcolabs.limbus.core.exceptions.UnexpectedStructureException;
-        import com.barcolabs.limbus.core.scrapers.VideoSiteScraper;
-        import com.barcolabs.limbus.core.scrapers.video.base.GetAndPostVideoScraper;
-        import com.barcolabs.limbus.core.scrapers.video.js.ScrapingJavaScriptEngine;
+import com.barcolabs.limbus.core.exceptions.ScrapingException;
+import com.barcolabs.limbus.core.exceptions.UnexpectedStructureException;
+import com.barcolabs.limbus.core.scrapers.VideoSiteScraper;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
-        import org.jsoup.Connection;
-        import org.jsoup.Jsoup;
-        import org.jsoup.nodes.Document;
-        import org.jsoup.nodes.Element;
-        import org.jsoup.select.Elements;
-        import sun.misc.Regexp;
+import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-        import java.io.IOException;
-        import java.net.MalformedURLException;
-        import java.net.URL;
-        import java.util.regex.Matcher;
-        import java.util.regex.Pattern;
-
-/**
- * Created by barbosa on 1/09/15.
- */
 public class NowvideoScraper extends VideoSiteScraper {
 
     private final static String API_ENDPOINT = "http://www.nowvideo.sx/api/player.api.php";
 
     private final static String[][] API_PARAMS = {
-            { "key", "fkzd" },
-            { "file", "flashvars.file" },
-            { "cid1", "flashvars.cid1"},
-            { "cid2", "flashvars.cid2"},
-            { "cid3", "flashvars.cid3"},
-            { "user", "user" },
-            { "pass", "pass" },
-            { "numOfErrors", "0" }
+            {"key", "fkzd"},
+            {"file", "flashvars.file"},
+            {"cid1", "flashvars.cid1"},
+            {"cid2", "flashvars.cid2"},
+            {"cid3", "flashvars.cid3"},
+            {"user", "user"},
+            {"pass", "pass"},
+            {"numOfErrors", "0"}
     };
 
     @Override
@@ -68,9 +59,9 @@ public class NowvideoScraper extends VideoSiteScraper {
         if (!fileMatcher.find())
             throw new UnexpectedStructureException("Couldn't find file for nowvideo api.");
 
-        return new String[][] {
-                new String[] { "key", keyMatcher.group(1) },
-                new String[] { "file", fileMatcher.group(1) },
+        return new String[][]{
+                new String[]{"key", keyMatcher.group(1)},
+                new String[]{"file", fileMatcher.group(1)},
         };
     }
 
@@ -100,7 +91,7 @@ public class NowvideoScraper extends VideoSiteScraper {
     }
 
     protected Document getDocument(String location) throws IOException, ScrapingException {
-        Connection.Response response= Jsoup.connect(location)
+        Connection.Response response = Jsoup.connect(location)
                 .referrer(location)
                 .ignoreContentType(true)
                 .userAgent(USER_AGENT)

@@ -4,7 +4,7 @@ import com.barcolabs.limbus.core.scrapers.ContentSiteScraper;
 
 import java.io.Serializable;
 
-public class VideoSiteLink implements Serializable{
+public class VideoSiteLink implements Serializable {
 
     private ContentSiteScraper scraper;
     private String uri;

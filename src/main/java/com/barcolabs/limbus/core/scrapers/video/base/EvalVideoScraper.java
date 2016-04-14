@@ -1,17 +1,15 @@
 package com.barcolabs.limbus.core.scrapers.video.base;
 
-import com.barcolabs.limbus.core.exceptions.*;
-import com.barcolabs.limbus.core.scrapers.video.js.*;
-
+import com.barcolabs.limbus.core.exceptions.ScrapingException;
+import com.barcolabs.limbus.core.exceptions.UnexpectedStructureException;
+import com.barcolabs.limbus.core.scrapers.video.js.ScrapingJavaScriptEngine;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by barbosa on 1/09/15.
- */
 public abstract class EvalVideoScraper extends GetAndPostVideoScraper {
 
     public static ScrapingJavaScriptEngine getEngine() {
@@ -45,9 +43,17 @@ public abstract class EvalVideoScraper extends GetAndPostVideoScraper {
     }
 
     @Override
-    protected String parsePostedDocument(Document doc) throws ScrapingException {
+    protected String parsePostedDocument(Document doc) throws ScrapingException, IOException {
 
-        checkForErrors(doc);
+        try {
+            checkForErrors(doc);
+        } catch (ScrapingException e) {
+            if (e.getMessage().toLowerCase().equals("skipped countdown")) {
+                System.out.println(this.getClass().getSimpleName() + ": got skipped countdowm");
+                return this.get(doc.location());
+            } else
+                throw e;
+        }
 
         String code = getCodeToEval(doc);
         ScrapingJavaScriptEngine engine = getEngine();

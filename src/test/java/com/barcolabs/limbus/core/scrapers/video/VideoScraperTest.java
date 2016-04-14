@@ -15,19 +15,23 @@ import static org.junit.Assert.*;
 public abstract class VideoScraperTest {
 
     abstract protected String[] getAliveLiks();
+
     abstract protected String[] getDeadLinks();
+
     abstract protected VideoSiteScraper getVideoScraper();
 
     protected String performGet(VideoSiteScraper scraper, String uri) throws IOException, ScrapingException {
         return scraper.get(uri);
     }
 
-    protected boolean useProxy() { return false; }
+    protected boolean useProxy() {
+        return false;
+    }
 
     @Before
     public void setProxy() throws Exception {
-
-        String ipInitial = Jsoup.connect("http://api.ipify.org/?format=plain").get().body().html();
+        String ipApiUrl = "http://api.ipify.org/?format=plain";
+        String ipInitial = Jsoup.connect(ipApiUrl).get().body().html();
         assertNotNull(ipInitial);
 
         if (!this.useProxy()) {
@@ -43,18 +47,22 @@ public abstract class VideoScraperTest {
         String proxyPort = env.get("PROXY_PORT");
 
         if (proxyHost != null) {
+
+            if (proxyPort == null)
+                proxyPort = "80";
+
+            // HTTP Proxy
             System.setProperty("http.proxyHost", proxyHost);
-            System.setProperty("https.proxyHost", proxyHost);
-        }
-
-        if (proxyPort != null) {
             System.setProperty("http.proxyPort", proxyPort);
+            // HTTPS Proxy
+            System.setProperty("https.proxyHost", proxyHost);
             System.setProperty("https.proxyPort", proxyPort);
+            // Check the proxy is actually working
+            String ipBehindProxy = Jsoup.connect(ipApiUrl).get().body().html();
+            assertNotNull(ipBehindProxy);
+            assertNotEquals(ipInitial, ipBehindProxy);
         }
 
-        String ipBehindProxy = Jsoup.connect("http://api.ipify.org/?format=plain").get().body().html();
-        assertNotNull(ipBehindProxy);
-        assertNotEquals(ipInitial, ipBehindProxy);
     }
 
     @Test

@@ -2,15 +2,11 @@ package com.barcolabs.limbus.core.scrapers.video;
 
 import com.barcolabs.limbus.core.exceptions.UnexpectedStructureException;
 import com.barcolabs.limbus.core.scrapers.video.base.GetAndPostVideoScraper;
-
 import org.jsoup.nodes.Document;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by barbosa on 31/08/15.
- */
 public class StreaminToScraper extends GetAndPostVideoScraper {
 
     @Override

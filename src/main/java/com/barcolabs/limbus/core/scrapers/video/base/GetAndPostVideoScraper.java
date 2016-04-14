@@ -3,7 +3,6 @@ package com.barcolabs.limbus.core.scrapers.video.base;
 import com.barcolabs.limbus.core.exceptions.ScrapingException;
 import com.barcolabs.limbus.core.exceptions.UnexpectedStructureException;
 import com.barcolabs.limbus.core.exceptions.VideoSiteFileException;
-
 import com.barcolabs.limbus.core.scrapers.VideoSiteScraper;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -16,21 +15,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by barbosa on 31/08/15.
- */
 public abstract class GetAndPostVideoScraper extends VideoSiteScraper {
-
-    protected Document getDocument(String location) throws IOException, ScrapingException {
-        Connection.Response response= Jsoup.connect(location)
-                .referrer(location)
-                .ignoreContentType(true)
-                .userAgent(USER_AGENT)
-                .followRedirects(true)
-                .execute();
-
-        return response.parse();
-    }
 
     public static void checkForErrors(Document doc) throws ScrapingException {
         if (doc.html().indexOf("File Deleted.") >= 0)
@@ -43,6 +28,17 @@ public abstract class GetAndPostVideoScraper extends VideoSiteScraper {
         Element error2 = doc.select("#file p").first();
         if (error2 != null)
             throw new VideoSiteFileException(error2.text());
+    }
+
+    protected Document getDocument(String location) throws IOException, ScrapingException {
+        Connection.Response response = Jsoup.connect(location)
+                .referrer(location)
+                .ignoreContentType(true)
+                .userAgent(USER_AGENT)
+                .followRedirects(true)
+                .execute();
+
+        return response.parse();
     }
 
     protected Element findForm(Document doc) throws ScrapingException {
@@ -76,7 +72,7 @@ public abstract class GetAndPostVideoScraper extends VideoSiteScraper {
         return form.absUrl("action");
     }
 
-    protected ArrayList<String[]> findFormFields(Element form) throws ScrapingException{
+    protected ArrayList<String[]> findFormFields(Element form) throws ScrapingException {
 
         ArrayList<String[]> fields = new ArrayList<String[]>();
 
@@ -85,7 +81,7 @@ public abstract class GetAndPostVideoScraper extends VideoSiteScraper {
             if (input.attr("type").equals("hidden") || input.attr("type").equals("submit")) {
                 String fieldName = input.attr("name");
                 String fieldValue = input.attr("value");
-                String[] field = new String[] { fieldName, fieldValue };
+                String[] field = new String[]{fieldName, fieldValue};
                 fields.add(field);
             }
         }
@@ -101,7 +97,7 @@ public abstract class GetAndPostVideoScraper extends VideoSiteScraper {
                 .referrer(location)
                 .followRedirects(true);
 
-        for(String[] fieldPair : params)
+        for (String[] fieldPair : params)
             conn.data(fieldPair[0], fieldPair[1]);
 
         Connection.Response response = conn.execute();
@@ -110,7 +106,7 @@ public abstract class GetAndPostVideoScraper extends VideoSiteScraper {
         return doc;
     }
 
-    protected abstract String parsePostedDocument(Document doc) throws ScrapingException;
+    protected abstract String parsePostedDocument(Document doc) throws ScrapingException, IOException;
 
     public String get(String location) throws IOException, ScrapingException {
         Document docGet = getDocument(location);

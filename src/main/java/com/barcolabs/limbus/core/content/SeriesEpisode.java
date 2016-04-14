@@ -16,7 +16,7 @@ public class SeriesEpisode implements Serializable, Watchable {
 
     public SeriesEpisode(ContentSiteScraper scraper, Series series, String id, int season, int episode, String title, String thumbnail) {
         this.scraper = scraper;
-        this.series =  series;
+        this.series = series;
         this.id = id;
         this.season = season;
         this.episode = episode;

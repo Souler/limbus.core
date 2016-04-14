@@ -1,7 +1,8 @@
 package com.barcolabs.limbus.core.scrapers.content;
 
 import com.barcolabs.limbus.core.content.*;
-import com.barcolabs.limbus.core.exceptions.*;
+import com.barcolabs.limbus.core.exceptions.ScrapingException;
+import com.barcolabs.limbus.core.exceptions.UnexpectedStructureException;
 import com.barcolabs.limbus.core.scrapers.ContentSiteScraper;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -18,16 +19,13 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by Juan JosÈ on 27/03/2016.
- */
 public class HDFullScraper extends ContentSiteScraper {
     public static final String URL_HOME = "http://hdfull.tv";
+    public static final String NAME = "hdfull.tv";
     private static final String URL_SEARCH = "http://hdfull.tv/ajax/search.php";
     private static final String URL_SERIES = "http://hdfull.tv/serie/";
     private static final String URL_EPISODES = "http://hdfull.tv/a/episodes";
     private static final String URL_THUMBNAIL = "http://hdfull.tv/tthumb/220x124/";
-    public static final String NAME = "hdfull.tv";
     private Gson gson;
 
     public HDFullScraper() {
@@ -102,7 +100,7 @@ public class HDFullScraper extends ContentSiteScraper {
             Element a = element.select("a").first();
             Element img = element.select("img").first();
             String title = img.attr("original-title")
-                                .replace(" [0-9]+x[0-9]+$", "");
+                    .replace(" [0-9]+x[0-9]+$", "");
             String poster = img.attr("src");
             String href = a.attr("href");
             String id = href.substring(URL_SERIES.length());
@@ -198,7 +196,7 @@ public class HDFullScraper extends ContentSiteScraper {
             Element langTag = link.select("h5 > span:nth-child(1)").first();
             if (langTag == null)
                 throw new UnexpectedStructureException("No langTag found");
-            Pattern rgxLang = Pattern.compile("idioma: ([a-z·ÈÌÛ˙Ò ]+)");
+            Pattern rgxLang = Pattern.compile("idioma: ([a-z√°√©√≠√≥√∫√± ]+)");
             Matcher mtcLang = rgxLang.matcher(langTag.text().toLowerCase());
             String lang;
             if (mtcLang.find())
@@ -211,18 +209,14 @@ public class HDFullScraper extends ContentSiteScraper {
 
             if (lang.equals("audio original")) {
                 language = Languages.enUS;
-            }
-            else if (lang.equals("audio espaÒol")) {
+            } else if (lang.equals("audio espa√±ol")) {
                 language = Languages.esES;
-            }
-            else if (lang.equals("audio latino")) {
+            } else if (lang.equals("audio latino")) {
                 language = Languages.es419;
-            }
-            else if (lang.equals("subtÌtulo espaÒol")) {
+            } else if (lang.equals("subt√≠tulo espa√±ol")) {
                 language = Languages.enUS;
                 subtitles = Languages.esES;
-            }
-            else if (lang.equals("subtÌtulo ingles")) {
+            } else if (lang.equals("subt√≠tulo ingles")) {
                 language = Languages.enUS;
                 subtitles = Languages.enUS;
             }
@@ -231,7 +225,7 @@ public class HDFullScraper extends ContentSiteScraper {
             Element qualityTag = link.select("h5 > span:nth-child(3)").first();
             if (langTag == null)
                 throw new UnexpectedStructureException("No langTag found");
-            Pattern rgxQuality = Pattern.compile("calidad: ([a-z·ÈÌÛ˙Ò ]+)");
+            Pattern rgxQuality = Pattern.compile("calidad: ([a-z√°√©√≠√≥√∫√± ]+)");
             Matcher mtcQuality = rgxQuality.matcher(qualityTag.text().toLowerCase());
             String quality;
             if (mtcQuality.find())

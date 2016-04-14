@@ -7,9 +7,6 @@ import org.mozilla.javascript.ScriptableObject;
 
 import java.lang.reflect.InvocationTargetException;
 
-/**
- * Created by barbosa on 29/09/15.
- */
 public class ScrapingJavaScriptEngine {
 
     // JS Engine

@@ -40,6 +40,7 @@ public class Movie implements Searchable, Serializable, Watchable {
     public ContentSiteScraper getScraper() {
         return scraper;
     }
+
     public String getThumbnail() {
         return thumbnail;
     }

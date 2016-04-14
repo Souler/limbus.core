@@ -7,7 +7,7 @@ public class PowvideoScraperTest extends VideoScraperTest {
 
     @Override
     protected String[] getAliveLiks() {
-        return new String[] {
+        return new String[]{
                 "http://powvideo.net/khss6vzfr8sd",
                 "http://powvideo.net/zbunw0aua6de",
                 "http://powvideo.net/txguvu3w9k0w"
@@ -16,7 +16,7 @@ public class PowvideoScraperTest extends VideoScraperTest {
 
     @Override
     protected String[] getDeadLinks() {
-        return new String[] {
+        return new String[]{
                 // TODO: Research them
         };
     }

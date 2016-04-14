@@ -7,9 +7,6 @@ import org.mozilla.javascript.ScriptableObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by barbosa on 1/09/15.
- */
 @SuppressWarnings("unused")
 public class JWPlayer extends ScriptableObject {
 
@@ -17,26 +14,60 @@ public class JWPlayer extends ScriptableObject {
 
     private List<String> files;
 
-    public JWPlayer() {}
+    public JWPlayer() {
+    }
 
-    public List<String> getFiles() { return this.files; }
-    public String getFile() { return this.files.size() > 0 ? this.files.get(0) : null; }
+    public List<String> getFiles() {
+        return this.files;
+    }
+
+    public String getFile() {
+        return this.files.size() > 0 ? this.files.get(0) : null;
+    }
 
     @Override
     public String getClassName() {
         return "JWPlayer";
     }
 
-    public void jsConstructor() {}
-    public JWPlayer jsFunction_onBufferChange(Object o) { return this; }
-    public JWPlayer jsFunction_onReady(Object o) { return this; }
-    public JWPlayer jsFunction_onError(Object o) { return this; }
-    public JWPlayer jsFunction_onPlaylist(Object o) { return this; }
-    public JWPlayer jsFunction_onBeforePlay(Object o) { return this; }
-    public JWPlayer jsFunction_onPlay(Object o) { return this; }
-    public JWPlayer jsFunction_onTime(Object o) { return this; }
-    public JWPlayer jsFunction_onSeek(Object o) { return this; }
-    public JWPlayer jsFunction_onComplete(Object o) { return this; }
+    public void jsConstructor() {
+    }
+
+    public JWPlayer jsFunction_onBufferChange(Object o) {
+        return this;
+    }
+
+    public JWPlayer jsFunction_onReady(Object o) {
+        return this;
+    }
+
+    public JWPlayer jsFunction_onError(Object o) {
+        return this;
+    }
+
+    public JWPlayer jsFunction_onPlaylist(Object o) {
+        return this;
+    }
+
+    public JWPlayer jsFunction_onBeforePlay(Object o) {
+        return this;
+    }
+
+    public JWPlayer jsFunction_onPlay(Object o) {
+        return this;
+    }
+
+    public JWPlayer jsFunction_onTime(Object o) {
+        return this;
+    }
+
+    public JWPlayer jsFunction_onSeek(Object o) {
+        return this;
+    }
+
+    public JWPlayer jsFunction_onComplete(Object o) {
+        return this;
+    }
 
 
     private ArrayList<String> map(NativeArray arr, String field) {
