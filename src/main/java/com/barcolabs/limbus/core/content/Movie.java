@@ -8,13 +8,16 @@ public class Movie implements Searchable, Serializable, Watchable {
 
     private ContentSiteScraper scraper;
     private String id;
-    private String poster;
     private String title;
+    private String poster;
 
-    public Movie(ContentSiteScraper scraper, String id, String poster, String title) {
+    private String thumbnail;
+
+    public Movie(ContentSiteScraper scraper, String id, String title, String poster, String thumbnail) {
         this.id = id;
-        this.poster = poster;
         this.title = title;
+        this.poster = poster;
+        this.thumbnail = thumbnail;
         this.scraper = scraper;
     }
 
@@ -37,4 +40,12 @@ public class Movie implements Searchable, Serializable, Watchable {
     public ContentSiteScraper getScraper() {
         return scraper;
     }
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
 }

@@ -78,7 +78,7 @@ public class HDFullScraper extends ContentSiteScraper {
             if (searchable.meta.equals("TV show"))
                 result[i] = new Series(this, id, searchable.title, searchable.image);
             else
-                result[i] = new Movie(this, id, searchable.title, searchable.image);
+                result[i] = new Movie(this, id, searchable.title, searchable.image, null);
         }
 
         return result;
@@ -166,7 +166,7 @@ public class HDFullScraper extends ContentSiteScraper {
                     title = e.title.get("en");
                 else if (e.title.keySet().size() > 0)
                     title = e.title.get(e.title.keySet().iterator().next());
-                episodes.add(new SeriesEpisode(this, episodeId, e.season, e.episode, title, thumbnail));
+                episodes.add(new SeriesEpisode(this, null, episodeId, e.season, e.episode, title, thumbnail));
             }
         }
 
@@ -174,7 +174,7 @@ public class HDFullScraper extends ContentSiteScraper {
     }
 
     @Override
-    public VideoSiteLink[] getExternalResources(String episodeId) throws ScrapingException, IOException {
+    public VideoSiteLink[] getVideoSiteLinks(String episodeId) throws ScrapingException, IOException {
         Connection connWeb = Jsoup.connect(URL_SERIES + episodeId)
                 .method(Connection.Method.GET)
                 .userAgent("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0")

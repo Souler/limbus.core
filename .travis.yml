@@ -1,5 +1,7 @@
 language: java
-scrpit: -Dtest=$(SITE)ScraperTest test
+jdk:
+  - oraclejdk7
+script: mvn -Dtest=${SITE}ScraperTest test
 env:
   - SITE: FlashX
   - SITE: Gamovideo
