@@ -60,10 +60,9 @@ public abstract class VideoScraperTest {
                 String result = performGet(scraper, url);
                 assertNotNull("The returned result by the scraper was null", result);
                 assertTrue("The returned result was not a valid URI", isValidUri(result));
-            } catch (IOException e) {
-                fail(e.getMessage());
-            } catch (ScrapingException e) {
+            } catch (Exception e) {
                 fail("Error while getting " + url + "\n" + e.getMessage());
+                e.printStackTrace();
             }
 
         }

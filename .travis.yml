@@ -1,1 +1,11 @@
 language: java
+scrpit: -Dtest=$(SITE)ScraperTest test
+env:
+  - SITE: FlashX
+  - SITE: Gamovideo
+  - SITE: Nowvideo
+  - SITE: Powvideo
+  - SITE: StreamCloud
+  - SITE: Streame
+  - SITE: StreaminTo
+  - SITE: StreamPlay
