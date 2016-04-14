@@ -2,6 +2,7 @@ package com.barcolabs.limbus.core.scrapers.video;
 
 import com.barcolabs.limbus.core.exceptions.ScrapingException;
 import com.barcolabs.limbus.core.scrapers.VideoSiteScraper;
+import org.jsoup.Jsoup;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,9 +10,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Map;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public abstract class VideoScraperTest {
 
@@ -26,7 +25,10 @@ public abstract class VideoScraperTest {
     protected boolean useProxy() { return false; }
 
     @Before
-    public void setProxy() {
+    public void setProxy() throws Exception {
+
+        String ipInitial = Jsoup.connect("http://api.ipify.org/?format=plain").get().body().html();
+        assertNotNull(ipInitial);
 
         if (!this.useProxy()) {
             System.setProperty("http.proxyHost", "");
@@ -49,6 +51,10 @@ public abstract class VideoScraperTest {
             System.setProperty("http.proxyPort", proxyPort);
             System.setProperty("https.proxyPort", proxyPort);
         }
+
+        String ipBehindProxy = Jsoup.connect("http://api.ipify.org/?format=plain").get().body().html();
+        assertNotNull(ipBehindProxy);
+        assertNotEquals(ipInitial, ipBehindProxy);
     }
 
     @Test
