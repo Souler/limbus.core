@@ -15,11 +15,12 @@ public class StreamCloudScraper extends GetAndPostVideoScraper {
     }
 
     protected String parsePostedDocument(Document doc) throws UnexpectedStructureException {
+        String body = doc.html();
         Pattern rgxFile = Pattern.compile("file: \"(.*)\",");
-        Matcher mtcFile = rgxFile.matcher(doc.html());
+        Matcher mtcFile = rgxFile.matcher(body);
         if (mtcFile.find())
             return mtcFile.group(1);
         else
-            throw new UnexpectedStructureException();
+            throw new UnexpectedStructureException("No file in jwplayer config found.", body);
     }
 }

@@ -1,6 +1,5 @@
-![Limbus Logo](http://i.imgur.com/dK33gNI.png)
-
-# Limbus Core [![Build Status](https://travis-ci.org/Souler/limbus.core.svg?branch=master)](https://travis-ci.org/Souler/limbus.core) [![Release](https://jitpack.io/v/souler/limbus.core.svg)](https://jitpack.io/#souler/limbus.core) [![Coverage Status](https://coveralls.io/repos/github/Souler/limbus.core/badge.svg?branch=master)](https://coveralls.io/github/Souler/limbus.core?branch=master)
+# ![Limbus Core](http://i.imgur.com/mGjtTci.png)
+[![Build Status](https://travis-ci.org/Souler/limbus.core.svg?branch=master)](https://travis-ci.org/Souler/limbus.core) [![Release](https://jitpack.io/v/souler/limbus.core.svg)](https://jitpack.io/#souler/limbus.core) [![Coverage Status](https://coveralls.io/repos/github/Souler/limbus.core/badge.svg?branch=master)](https://coveralls.io/github/Souler/limbus.core?branch=master)
 
 Limbus Core is library for scraping video websites and websites that link the previous ones.
 

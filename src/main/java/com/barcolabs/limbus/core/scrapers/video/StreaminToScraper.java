@@ -24,6 +24,6 @@ public class StreaminToScraper extends GetAndPostVideoScraper {
         if (mtcFile.find() && mtcStreamer.find())
             return mtcStreamer.group(1) + "/_definst_/" + mtcFile.group(1);
         else
-            throw new UnexpectedStructureException();
+            throw new UnexpectedStructureException("No file in jwplayer config found");
     }
 }

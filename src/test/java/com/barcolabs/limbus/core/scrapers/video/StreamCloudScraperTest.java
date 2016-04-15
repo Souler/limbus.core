@@ -1,30 +1,20 @@
 package com.barcolabs.limbus.core.scrapers.video;
 
-import com.barcolabs.limbus.core.scrapers.VideoSiteScraper;
+import org.junit.runners.Parameterized;
 
-public class StreamCloudScraperTest extends VideoScraperTest {
+import java.util.Arrays;
+import java.util.Collection;
 
-    @Override
-    protected boolean useProxy() {
-        return true;
+public class StreamCloudScraperTest extends ParametrizedVideoScraperTest {
+
+    public StreamCloudScraperTest(String url, boolean isAlive) {
+        super(new StreamCloudScraper(), true, url, isAlive);
     }
 
-    @Override
-    protected String[] getAliveLiks() {
-        return new String[]{
-                "http://streamcloud.eu/f9c2tj25ci43"
-        };
-    }
-
-    @Override
-    protected String[] getDeadLinks() {
-        return new String[]{
-                // TODO: Research them
-        };
-    }
-
-    @Override
-    protected VideoSiteScraper getVideoScraper() {
-        return new StreamCloudScraper();
+    @Parameterized.Parameters
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][]{
+                {"http://streamcloud.eu/f9c2tj25ci43", true},
+        });
     }
 }

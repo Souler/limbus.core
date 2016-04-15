@@ -1,25 +1,21 @@
 package com.barcolabs.limbus.core.scrapers.video;
 
-import com.barcolabs.limbus.core.scrapers.VideoSiteScraper;
+import org.junit.runners.Parameterized;
 
-public class StreaminToScraperTest extends VideoScraperTest {
+import java.util.Arrays;
+import java.util.Collection;
 
-    @Override
-    protected String[] getAliveLiks() {
-        return new String[]{
-                "http://streamin.to/vl7d79kfv0g9"
-        };
+public class StreaminToScraperTest extends ParametrizedVideoScraperTest {
+
+    public StreaminToScraperTest(String url, boolean isAlive) {
+        super(new StreaminToScraper(), false, url, isAlive);
     }
 
-    @Override
-    protected String[] getDeadLinks() {
-        return new String[]{
-                "http://streamin.to/ik4h8vw4ufxw"
-        };
-    }
-
-    @Override
-    protected VideoSiteScraper getVideoScraper() {
-        return new StreaminToScraper();
+    @Parameterized.Parameters
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][]{
+                {"http://streamin.to/vl7d79kfv0g9", true},
+                {"http://streamin.to/ik4h8vw4ufxw", false},
+        });
     }
 }

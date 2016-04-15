@@ -1,28 +1,22 @@
 package com.barcolabs.limbus.core.scrapers.video;
 
+import org.junit.runners.Parameterized;
 
-import com.barcolabs.limbus.core.scrapers.VideoSiteScraper;
+import java.util.Arrays;
+import java.util.Collection;
 
-public class PowvideoScraperTest extends VideoScraperTest {
+public class PowvideoScraperTest extends ParametrizedVideoScraperTest {
 
-    @Override
-    protected String[] getAliveLiks() {
-        return new String[]{
-                "http://powvideo.net/khss6vzfr8sd",
-                "http://powvideo.net/zbunw0aua6de",
-                "http://powvideo.net/txguvu3w9k0w"
-        };
+    public PowvideoScraperTest(String url, boolean isAlive) {
+        super(new PowvideoScraper(), false, url, isAlive);
     }
 
-    @Override
-    protected String[] getDeadLinks() {
-        return new String[]{
-                // TODO: Research them
-        };
-    }
-
-    @Override
-    protected VideoSiteScraper getVideoScraper() {
-        return new PowvideoScraper();
+    @Parameterized.Parameters
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][]{
+                {"http://powvideo.net/khss6vzfr8sd", true},
+                {"http://powvideo.net/zbunw0aua6de", true},
+                {"http://powvideo.net/txguvu3w9k0w", true},
+        });
     }
 }

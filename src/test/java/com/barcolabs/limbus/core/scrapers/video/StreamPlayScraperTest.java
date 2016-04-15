@@ -1,24 +1,20 @@
 package com.barcolabs.limbus.core.scrapers.video;
 
-import com.barcolabs.limbus.core.scrapers.VideoSiteScraper;
+import org.junit.runners.Parameterized;
 
-public class StreamPlayScraperTest extends VideoScraperTest {
-    @Override
-    protected String[] getAliveLiks() {
-        return new String[]{
-                "http://streamplay.to/m1wwqwdkkwo5"
-        };
+import java.util.Arrays;
+import java.util.Collection;
+
+public class StreamPlayScraperTest extends ParametrizedVideoScraperTest {
+
+    public StreamPlayScraperTest(String url, boolean isAlive) {
+        super(new StreamPlayScraper(), false, url, isAlive);
     }
 
-    @Override
-    protected String[] getDeadLinks() {
-        return new String[]{
-                // TODO: Research them
-        };
-    }
-
-    @Override
-    protected VideoSiteScraper getVideoScraper() {
-        return new StreamPlayScraper();
+    @Parameterized.Parameters
+    public static Collection<Object[]> data() {
+        return Arrays.asList(new Object[][]{
+                {"http://streamplay.to/m1wwqwdkkwo5", true},
+        });
     }
 }
