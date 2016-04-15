@@ -40,17 +40,17 @@ public abstract class ParametrizedVideoScraperTest {
 
     @Before
     public void setProxy() throws Exception {
+        System.setProperty("http.proxyHost", "");
+        System.setProperty("https.proxyHost", "");
+        System.setProperty("http.proxyPort", "");
+        System.setProperty("https.proxyPort", "");
+
         String ipApiUrl = "http://api.ipify.org/?format=plain";
         String ipInitial = Jsoup.connect(ipApiUrl).get().body().html();
         assertNotNull(ipInitial);
 
-        if (!this.useProxy) {
-            System.setProperty("http.proxyHost", "");
-            System.setProperty("https.proxyHost", "");
-            System.setProperty("http.proxyPort", "");
-            System.setProperty("https.proxyPort", "");
+        if (!this.useProxy)
             return;
-        }
 
         Map<String, String> env = System.getenv();
         String proxyHost = env.get("PROXY_HOST");
