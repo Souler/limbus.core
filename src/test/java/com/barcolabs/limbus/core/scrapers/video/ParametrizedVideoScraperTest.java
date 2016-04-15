@@ -29,14 +29,6 @@ public abstract class ParametrizedVideoScraperTest {
         this.isAlive = isAlive;
     }
 
-    public ParametrizedVideoScraperTest(VideoSiteScraper scraper, String url, boolean isAlive) {
-        this(scraper, false, url, isAlive);
-    }
-
-    public ParametrizedVideoScraperTest(VideoSiteScraper scraper, String url) {
-        this(scraper, false, url, true);
-    }
-
     private boolean isValidUri(String uri) {
         try {
             URI.create(uri);
@@ -83,8 +75,13 @@ public abstract class ParametrizedVideoScraperTest {
     }
 
     @Test
+    public void testFindScraperByUrl() {
+        VideoSiteScraper scraper = VideoSiteScraper.getScraperFor(this.url);
+        assertEquals(this.scraper.getClass(), scraper.getClass());
+    }
+
+    @Test
     public void testLink() {
-        System.out.println("Testing link " + this.url + ". Is expected to be alive? " + this.isAlive);
         try {
             String url = scraper.get(this.url);
             if (isAlive) {

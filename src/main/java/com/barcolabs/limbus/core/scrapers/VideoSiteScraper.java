@@ -9,7 +9,7 @@ import java.net.URL;
 
 public abstract class VideoSiteScraper extends Scraper {
 
-    public static String getVideoURI(String videoSiteUrl) throws IOException, ScrapingException {
+    public static VideoSiteScraper getScraperFor(String videoSiteUrl) {
         VideoSiteScraper[] scrapers = new VideoSiteScraper[]{
                 new FlashXScraper(),
                 new GamovideoScraper(),
@@ -23,7 +23,7 @@ public abstract class VideoSiteScraper extends Scraper {
 
         for (VideoSiteScraper scraper : scrapers)
             if (scraper.canHandle(videoSiteUrl))
-                return scraper.get(videoSiteUrl);
+                return scraper;
 
         return null;
     }
