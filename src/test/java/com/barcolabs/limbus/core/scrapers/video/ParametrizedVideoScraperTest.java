@@ -77,7 +77,13 @@ public abstract class ParametrizedVideoScraperTest {
     @Test
     public void testFindScraperByUrl() {
         VideoSiteScraper scraper = VideoSiteScraper.getScraperFor(this.url);
+        assertNotNull(scraper);
         assertEquals(this.scraper.getClass(), scraper.getClass());
+    }
+
+    @Test
+    public void canHandle() {
+        assertTrue(this.scraper.canHandle(this.url));
     }
 
     @Test
