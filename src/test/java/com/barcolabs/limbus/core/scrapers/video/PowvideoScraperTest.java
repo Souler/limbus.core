@@ -17,6 +17,7 @@ public class PowvideoScraperTest extends ParametrizedVideoScraperTest {
                 {"http://powvideo.net/khss6vzfr8sd", true},
                 {"http://powvideo.net/zbunw0aua6de", true},
                 {"http://powvideo.net/txguvu3w9k0w", true},
+                {"http://powvideo.net/6mne7k4ti08u", true}
         });
     }
 }

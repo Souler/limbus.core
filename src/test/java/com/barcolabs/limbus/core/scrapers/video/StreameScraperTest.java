@@ -14,7 +14,8 @@ public class StreameScraperTest extends ParametrizedVideoScraperTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                {"http://streame.net/7dfhq8oqr0e2", true},
+                {"http://streame.net/vzdzej7a8cj3", true},
+                {"http://streame.net/7dfhq8oqr0e2", false},
         });
     }
 }
