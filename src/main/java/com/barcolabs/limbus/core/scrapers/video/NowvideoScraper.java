@@ -3,6 +3,7 @@ package com.barcolabs.limbus.core.scrapers.video;
 import com.barcolabs.limbus.core.exceptions.ScrapingException;
 import com.barcolabs.limbus.core.exceptions.UnexpectedStructureException;
 import com.barcolabs.limbus.core.scrapers.VideoSiteScraper;
+import com.barcolabs.limbus.core.scrapers.video.base.GetAndPostVideoScraper;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -13,7 +14,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NowvideoScraper extends VideoSiteScraper {
+public class NowvideoScraper extends GetAndPostVideoScraper {
 
     private final static String API_ENDPOINT = "http://www.nowvideo.sx/api/player.api.php";
 
@@ -102,8 +103,7 @@ public class NowvideoScraper extends VideoSiteScraper {
     }
 
     @Override
-    public String get(String uri) throws IOException, ScrapingException {
-        Document doc = getDocument(uri);
+    protected String parsePostedDocument(Document doc) throws ScrapingException, IOException {
         String[][] params = findApiParams(doc);
         return getVideoUrlFromApi(params);
     }
