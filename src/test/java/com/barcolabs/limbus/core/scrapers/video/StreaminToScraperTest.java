@@ -14,6 +14,7 @@ public class StreaminToScraperTest extends ParametrizedVideoScraperTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
+                {"http://streamin.to/eri713y5j58g", true},
                 {"http://streamin.to/vl7d79kfv0g9", true},
                 {"http://streamin.to/ik4h8vw4ufxw", false},
         });

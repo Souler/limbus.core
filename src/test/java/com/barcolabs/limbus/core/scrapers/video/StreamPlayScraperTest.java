@@ -14,6 +14,7 @@ public class StreamPlayScraperTest extends ParametrizedVideoScraperTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
+                {"http://streamplay.to/3hspka903u1b", true},
                 {"http://streamplay.to/m1wwqwdkkwo5", true},
         });
     }

@@ -14,6 +14,7 @@ public class StreamCloudScraperTest extends ParametrizedVideoScraperTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
+                {"http://streamcloud.eu/nzb17iqn1m2p/El_Ultimatum_De_Bourne_MicroHD_1080p_AC3_5.1.avi.html", true},
                 {"http://streamcloud.eu/f9c2tj25ci43", true},
         });
     }

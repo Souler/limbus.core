@@ -14,6 +14,7 @@ public class GamovideoScraperTest extends ParametrizedVideoScraperTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
+                {"http://gamovideo.com/50388zkk1208", true},
                 {"http://gamovideo.com/63h5k524n936", true},
                 {"http://gamovideo.com/3lsucyfv2poz", false},
         });
