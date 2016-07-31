@@ -239,6 +239,20 @@ public class HDFullScraper extends ContentSiteScraper {
         return result;
     }
 
+    public VideoSiteLink getExternalFileUrl(VideoSiteLink link) throws ScrapingException, IOException {
+        Connection connWeb = Jsoup.connect(link.getUri())
+                .method(Connection.Method.GET)
+                .userAgent("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0")
+                .referrer(URL_HOME)
+                .followRedirects(true);
+
+        Connection.Response response = connWeb.execute();
+        Document doc = response.parse();
+        Elements leaveButton = doc.select("a.btn.btn-info'");
+        String extUrl = leaveButton.attr("href");
+        return new VideoSiteLink(this, extUrl, link.getLanguage(), link.getSubtitles(), link.getQuality());
+    }
+
     private static class SearchResultEntry {
         private String permalink;
         private String image;

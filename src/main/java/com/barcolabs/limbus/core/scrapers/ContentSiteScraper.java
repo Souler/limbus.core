@@ -23,4 +23,6 @@ public abstract class ContentSiteScraper extends Scraper {
     public VideoSiteLink[] getVideoSiteLinks(Watchable watchable) throws ScrapingException, IOException {
         return getVideoSiteLinks(watchable.getId());
     }
+
+    public abstract VideoSiteLink getExternalFileUrl(VideoSiteLink url) throws ScrapingException, IOException ;
 }
