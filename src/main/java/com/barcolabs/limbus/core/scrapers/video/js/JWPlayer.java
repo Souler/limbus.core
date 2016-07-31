@@ -6,6 +6,7 @@ import org.mozilla.javascript.ScriptableObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @SuppressWarnings("unused")
 public class JWPlayer extends ScriptableObject {
@@ -22,7 +23,18 @@ public class JWPlayer extends ScriptableObject {
     }
 
     public String getFile() {
-        return this.files.size() > 0 ? this.files.get(0) : null;
+        int len = this.files.size();
+
+        if (len > 1) {
+            for (String file : this.files) {
+                System.out.println(file);
+                Pattern p = Pattern.compile("^http[s]*:");
+                if (p.matcher(file).find())
+                    return file;
+            }
+        }
+
+        return len > 0 ? this.files.get(0) : null;
     }
 
     @Override
@@ -66,6 +78,10 @@ public class JWPlayer extends ScriptableObject {
     }
 
     public JWPlayer jsFunction_onComplete(Object o) {
+        return this;
+    }
+
+    public JWPlayer jsFunction_addButton(Object o) {
         return this;
     }
 

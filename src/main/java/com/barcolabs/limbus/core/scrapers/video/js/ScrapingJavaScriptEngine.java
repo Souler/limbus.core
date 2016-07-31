@@ -25,6 +25,8 @@ public class ScrapingJavaScriptEngine {
         // Define the classes to be used inside the scripts
         try {
             ScriptableObject.defineClass(scope, JS_Document.class);
+            ScriptableObject.defineClass(scope, JS_Location.class);
+            ScriptableObject.defineClass(scope, JS_Window.class);
             ScriptableObject.defineClass(scope, SWFObject.class);
             ScriptableObject.defineClass(scope, JWPlayer.class);
             ScriptableObject.defineClass(scope, JQuery.class);
@@ -37,8 +39,13 @@ public class ScrapingJavaScriptEngine {
         }
 
         // Add the standard global variables to the scope
+        // Mock document
         Scriptable document = this.context.newObject(scope, "Document");
         scope.put("document", scope, document);
+        // Mock window
+        Scriptable window = this.context.newObject(scope, "Window");
+        scope.put("window", scope, window);
+        // Mock jQuery
         Scriptable jquery = this.context.newObject(scope, "JQuery");
         scope.put("jQuery", scope, jquery);
         Scriptable swfobject = this.context.newObject(scope, "SWFObject");
@@ -62,7 +69,7 @@ public class ScrapingJavaScriptEngine {
 
     public Object eval(String code) {
         return context.evaluateString(scope, code, "SJSE", 1, null);
-    }
+}
 
     public JWPlayer getJwPlayer() {
         return jwPlayer;
