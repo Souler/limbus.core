@@ -1,7 +1,6 @@
 package com.barcolabs.limbus.core.scrapers.video.js;
 
 import org.mozilla.javascript.NativeObject;
-import sun.org.mozilla.javascript.internal.Undefined;
 
 public class JS_Node extends NativeObject {
 

@@ -2,7 +2,6 @@ package com.barcolabs.limbus.core.scrapers.video.js;
 
 import org.mozilla.javascript.NativeObject;
 import org.mozilla.javascript.ScriptableObject;
-import sun.org.mozilla.javascript.internal.NativeArray;
 
 public class JS_Document extends ScriptableObject {
 
