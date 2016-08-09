@@ -192,6 +192,10 @@ public class HDFullScraper extends ContentSiteScraper {
             if (anchor == null)
                 throw new UnexpectedStructureException("No anchor found");
 
+            Element providerName = link.select(".provider").first();
+            if (providerName == null)
+                throw new UnexpectedStructureException("No provider found");
+
             // Get the language
             Element langTag = link.select("h5 > span:nth-child(1)").first();
             if (langTag == null)
@@ -233,7 +237,7 @@ public class HDFullScraper extends ContentSiteScraper {
             else
                 throw new UnexpectedStructureException("Can't parse qualityTag");
 
-            result[i] = new VideoSiteLink(this, anchor.attr("href"), language, subtitles, quality);
+            result[i] = new VideoSiteLink(this, providerName.text(), anchor.attr("href"), language, subtitles, quality);
         }
 
         return result;
