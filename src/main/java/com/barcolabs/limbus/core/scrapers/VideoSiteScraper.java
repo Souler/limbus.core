@@ -9,18 +9,20 @@ import java.net.URL;
 
 public abstract class VideoSiteScraper extends Scraper {
 
-    public static VideoSiteScraper getScraperFor(String videoSiteUrl) {
-        VideoSiteScraper[] scrapers = new VideoSiteScraper[]{
-                new FlashXScraper(),
-                new GamovideoScraper(),
-                new NowvideoScraper(),
-                new PowvideoScraper(),
-                new StreamCloudScraper(),
-                new StreameScraper(),
-                new StreaminToScraper(),
-                new StreamPlayScraper()
-        };
+    private static VideoSiteScraper[] scrapers = new VideoSiteScraper[] {
+            new HDFullExternalScraper(),
+            new FlashXScraper(),
+            new GamovideoScraper(),
+            new NowvideoScraper(),
+            new PowvideoScraper(),
+            new StreamCloudScraper(),
+            new StreameScraper(),
+            new StreaminToScraper(),
+            new StreamPlayScraper(),
+            new IDoWatchScraper()
+    };
 
+    public static VideoSiteScraper getScraperFor(String videoSiteUrl) {
         for (VideoSiteScraper scraper : scrapers)
             if (scraper.canHandle(videoSiteUrl))
                 return scraper;
