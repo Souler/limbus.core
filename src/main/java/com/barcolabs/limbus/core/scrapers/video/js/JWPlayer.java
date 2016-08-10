@@ -16,6 +16,7 @@ public class JWPlayer extends ScriptableObject {
     private List<String> files;
 
     public JWPlayer() {
+        this.files = new ArrayList<>();
     }
 
     public List<String> getFiles() {
@@ -104,8 +105,6 @@ public class JWPlayer extends ScriptableObject {
         Object fileRaw = NativeObject.getProperty(config, "file");
         Object sourcesRaw = NativeObject.getProperty(config, "sources");
         Object playlistRaw = NativeObject.getProperty(config, "playlist");
-
-        this.files = new ArrayList<String>();
 
         if (fileRaw != NOT_FOUND)
             files.add((String) fileRaw);
