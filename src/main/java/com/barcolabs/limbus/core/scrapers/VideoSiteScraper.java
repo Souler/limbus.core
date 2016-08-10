@@ -2,6 +2,7 @@ package com.barcolabs.limbus.core.scrapers;
 
 import com.barcolabs.limbus.core.exceptions.ScrapingException;
 import com.barcolabs.limbus.core.scrapers.video.*;
+import okhttp3.OkHttpClient;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -28,6 +29,16 @@ public abstract class VideoSiteScraper extends Scraper {
                 return scraper;
 
         return null;
+    }
+
+    protected OkHttpClient client;
+
+    public VideoSiteScraper(OkHttpClient client) {
+        this.client = client;
+    }
+
+    public VideoSiteScraper() {
+        this(new OkHttpClient());
     }
 
     public abstract String get(String uri) throws IOException, ScrapingException;
