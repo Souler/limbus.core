@@ -4,6 +4,10 @@ import com.barcolabs.limbus.core.exceptions.ScrapingException;
 import com.barcolabs.limbus.core.exceptions.UnexpectedStructureException;
 import com.barcolabs.limbus.core.exceptions.VideoSiteFileException;
 import com.barcolabs.limbus.core.scrapers.VideoSiteScraper;
+import okhttp3.MediaType;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -11,11 +15,14 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class GetAndPostVideoScraper extends VideoSiteScraper {
+
+    protected static final MediaType URL_ENCODED = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
 
     public static void checkForErrors(Document doc) throws ScrapingException {
         if (doc.html().indexOf("File Deleted.") >= 0)
@@ -31,14 +38,13 @@ public abstract class GetAndPostVideoScraper extends VideoSiteScraper {
     }
 
     protected Document getDocument(String location) throws IOException, ScrapingException {
-        Connection.Response response = Jsoup.connect(location)
-                .referrer(location)
-                .ignoreContentType(true)
-                .userAgent(USER_AGENT)
-                .followRedirects(true)
-                .execute();
-
-        return response.parse();
+        Request request = new Request.Builder()
+                .url(location)
+                .header("User-Agent", USER_AGENT)
+                .header("Referrer", location)
+                .build();
+        Response response = this.client.newCall(request).execute();
+        return Jsoup.parse(response.body().string(), location);
     }
 
     protected Element findForm(Document doc) throws ScrapingException {
@@ -90,20 +96,26 @@ public abstract class GetAndPostVideoScraper extends VideoSiteScraper {
     }
 
     protected Document postForm(String location, ArrayList<String[]> params) throws IOException, ScrapingException {
-        Connection conn = Jsoup.connect(location)
-                .method(Connection.Method.POST)
-                .ignoreContentType(true)
-                .userAgent(USER_AGENT)
-                .referrer(location)
-                .followRedirects(true);
 
-        for (String[] fieldPair : params)
-            conn.data(fieldPair[0], fieldPair[1]);
+        StringBuilder bodyBuilder = new StringBuilder();
+        for (int i=0; i < params.size(); i++) {
+            String[] pair = params.get(i);
+            bodyBuilder.append(URLEncoder.encode(pair[0], "UTF-8"));
+            bodyBuilder.append("=");
+            bodyBuilder.append(URLEncoder.encode(pair[1], "UTF-8"));
+            if (i != params.size() - 1)
+                bodyBuilder.append("&");
+        }
 
-        Connection.Response response = conn.execute();
-        Document doc = response.parse();
-
-        return doc;
+        RequestBody body = RequestBody.create(URL_ENCODED, bodyBuilder.toString());
+        Request request = new Request.Builder()
+                .url(location)
+                .header("User-Agent", USER_AGENT)
+                .header("Referrer", location)
+                .post(body)
+                .build();
+        Response response = this.client.newCall(request).execute();
+        return Jsoup.parse(response.body().string(), location);
     }
 
     protected abstract String parsePostedDocument(Document doc) throws ScrapingException, IOException;
