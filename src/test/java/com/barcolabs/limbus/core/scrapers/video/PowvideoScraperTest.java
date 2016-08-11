@@ -15,13 +15,7 @@ public class PowvideoScraperTest extends ParametrizedVideoScraperTest {
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
                 {"http://powvideo.net/ilfc4hg4oqg2", true},
-                {"http://powvideo.net/khss6vzfr8sd", true},
-                {"http://powvideo.net/zbunw0aua6de", true},
-                {"http://powvideo.net/txguvu3w9k0w", true},
-                {"http://powvideo.net/6mne7k4ti08u", true},
-                {"http://powvideo.net/enz7edr01390", true},
-                {"http://powvideo.net/pfixf8w5emx4", true},
-                {"http://powvideo.net/yqqla520av4l", true}
+                {"http://powvideo.net/khss6vzfr8sd", true}
         });
     }
 }
