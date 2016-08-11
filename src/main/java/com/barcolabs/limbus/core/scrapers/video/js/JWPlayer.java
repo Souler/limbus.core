@@ -28,7 +28,6 @@ public class JWPlayer extends ScriptableObject {
 
         if (len > 1) {
             for (String file : this.files) {
-                System.out.println(file);
                 Pattern p = Pattern.compile("^http[s]*:");
                 if (p.matcher(file).find())
                     return file;
