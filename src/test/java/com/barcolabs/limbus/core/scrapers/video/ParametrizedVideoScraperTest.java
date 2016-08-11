@@ -91,8 +91,9 @@ public abstract class ParametrizedVideoScraperTest {
         try {
             String url = scraper.get(this.url);
             if (isAlive) {
-                assertNotNull("The returned result by the scraper was null", url);
-                assertTrue("The returned result was not a valid URI", isValidUri(url));
+                assertNotNull("The returned video url by the scraper was null", url);
+                assertNotEquals("The returned video url by the scraper was empty", 0, url.length());
+                assertTrue("The returned video url was not a valid URI", isValidUri(url));
                 System.out.println(url);
             } else {
                 fail("A dead link didn't throw any exception");
