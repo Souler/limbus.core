@@ -2,7 +2,7 @@ package com.barcolabs.limbus.core.scrapers.video;
 
 import com.barcolabs.limbus.core.exceptions.ScrapingException;
 import com.barcolabs.limbus.core.scrapers.video.base.EvalVideoScraper;
-import com.barcolabs.limbus.core.scrapers.video.js.ScrapingJavaScriptEngine;
+import com.barcolabs.limbus.core.scrapers.js.ScrapingJavaScriptEngine;
 import org.jsoup.nodes.Document;
 import org.mozilla.javascript.NativeArray;
 import org.mozilla.javascript.NativeObject;

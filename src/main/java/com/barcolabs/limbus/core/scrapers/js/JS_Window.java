@@ -1,4 +1,4 @@
-package com.barcolabs.limbus.core.scrapers.video.js;
+package com.barcolabs.limbus.core.scrapers.js;
 
 import org.mozilla.javascript.ScriptableObject;
 

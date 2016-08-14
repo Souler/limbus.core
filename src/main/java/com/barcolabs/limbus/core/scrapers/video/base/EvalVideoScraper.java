@@ -2,7 +2,7 @@ package com.barcolabs.limbus.core.scrapers.video.base;
 
 import com.barcolabs.limbus.core.exceptions.ScrapingException;
 import com.barcolabs.limbus.core.exceptions.UnexpectedStructureException;
-import com.barcolabs.limbus.core.scrapers.video.js.ScrapingJavaScriptEngine;
+import com.barcolabs.limbus.core.scrapers.js.ScrapingJavaScriptEngine;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
